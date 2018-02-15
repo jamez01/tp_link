@@ -9,6 +9,7 @@ require 'yaml'
 require 'json'
 require 'securerandom'
 
+require 'tp_link/errors.rb'
 require 'tp_link/config.rb'
 require 'tp_link/light.rb'
 require 'tp_link/api.rb'
