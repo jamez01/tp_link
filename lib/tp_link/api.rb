@@ -9,10 +9,18 @@ module TPLink
     # c.use Faraday::Response::RaiseError
     # c.use Faraday::Adapter::NetHttp
     c.request :json
-
     c.response :json, :content_type => /\bjson$/
-    c.use :instrumentation
     c.adapter Faraday.default_adapter
+    c.params['appName'] = "Kasa_Android"
+    c.params['termID']  = Proc.new { @config.terminal_uuid }
+    c.params['appVer'] = '1.4.4.607'
+    c.params['ospf'] = 'Android+6.0.1'
+    c.params['netType'] = 'wifi'
+    c.params['locale'] =  'es_ES'
+    c.headers['Connection'] = 'Keep-Alive'
+    c.headers['User-Agent'] = 'Dalvik/2.1.0 (Linux; U; Android 6.0.1; A0001 Build/M4B30X)'
+    c.headers['Content-Type'] = "applicatoin/json;charset=utf-8"
+    c.headers['Accept'] = "application/json, text/plain, */*"
 
   end
 
@@ -25,22 +33,23 @@ module TPLink
       @config = Config.new(options[:config])
     end
 
-    def auth
+
+    def get_token
       response=TOKEN_API.post do |req|
         req.url '/'
-        req.params['appName'] = "Kasa_Android"
-        req.params['termID']  = @config.terminal_uuid
-        req.params['appVer'] = '1.4.4.607'
-        req.params['ospf'] = 'Android+6.0.1'
-        req.params['netType'] = 'wifi'
-        req.params['locale'] =  'es_ES'
-        req.headers['Connection'] = 'Keep-Alive'
-        req.headers['User-Agent'] = 'Dalvik/2.1.0 (Linux; U; Android 6.0.1; A0001 Build/M4B30X)'
-        req.headers['Content-Type'] = "applicatoin/json;charset=utf-8"
-        req.headers['Accept'] = "application/json, text/plain, */*"
         req.body = {method:"login",url:"https://wap.tplinkcloud.com",params: @config.to_hash}.to_json
       end
-      JSON.parse(response.body)['result']['token'] if response.success?
+      parse_response(response)['token']
     end
+
+    private
+    
+    def parse_response(res)
+      raise TPLinkCloudError.new("Generic TPLinkCloud Error") unless res.success?
+      response = JSON.parse(res.body)
+      raise TPLinkCloudError.new("TPLinkCloud API Error") unless res.body['error'].to_i == 0
+      return response['result']
+    end
+
   end
 end
