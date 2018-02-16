@@ -20,7 +20,36 @@ Or install it yourself as:
 
 ## Usage
 
-TO DO
+#### Create your config file at `~/.tp_link` The contents should include your username and password for Kasa/TPLink Cloud.
+
+```
+---
+user: your-kasa-email@example.com
+password: YourPassword
+```
+
+**TODO: Allow config to be passed pragmatically**
+
+#### Examples:
+
+```ruby
+sh = TPLink::SmartHome.new
+
+# Get array of TPLink Devices (currently only dimmable lights work).
+sh.devices
+
+# Find a device by name:
+light = sh.find("kitchen")
+
+# Turn light on
+light.on
+
+# Turn light off
+light.off
+
+# Dim light to 50%
+light.on(50)
+```
 
 ## Contributing
 
