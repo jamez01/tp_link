@@ -13,7 +13,4 @@ require 'tp_link/errors.rb'
 require 'tp_link/config.rb'
 require 'tp_link/light.rb'
 require 'tp_link/api.rb'
-
-
-
-# Generates the configuration used by the tplink cloud API
+require 'tp_link/smart_home.rb'
