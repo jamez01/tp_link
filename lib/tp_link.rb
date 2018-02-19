@@ -11,6 +11,8 @@ require 'securerandom'
 
 require 'tp_link/errors.rb'
 require 'tp_link/config.rb'
+require 'tp_link/device.rb'
 require 'tp_link/light.rb'
+require 'tp_link/plug.rb'
 require 'tp_link/api.rb'
 require 'tp_link/smart_home.rb'

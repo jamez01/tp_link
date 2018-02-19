@@ -2,8 +2,10 @@
 
 # TPLink Module
 module TPLink
-  # Talk to TPLink's API
+  # Talk to TPLink's API.  This class is use internally.  You should not need to call it.
+  # @!visibility private
   class API
+    # @!visibility private
     DEFAULT_PARAMS = {
       'appName' =>  'Kasa_Android',
       'termID' =>  proc { @config.terminal_uuid },
@@ -12,6 +14,8 @@ module TPLink
       'netType' =>  'wifi',
       'locale' =>  'es_ES'
     }.freeze
+
+    # @!visibility private
     DEFAULT_HEADERS = {
       'Connection' => 'Keep-Alive',
       'User-Agent' => 'Dalvik/2.1.0 (Linux; U; Android 6.0.1; ' \
@@ -19,7 +23,18 @@ module TPLink
       'Content-Type' => 'applicatoin/json;charset=utf-8',
       'Accept' => 'application/json, text/plain, */*'
     }.freeze
-    TOKEN_API = Faraday.new('https://wap.tplinkcloud.com') do |c|
+
+    # # @!visibility private
+    # TOKEN_API = Faraday.new('https://wap.tplinkcloud.com') do |c|
+    #   c.request :json
+    #   c.response :json, content_type: /\bjson$/i
+    #   c.adapter Faraday.default_adapter
+    #   c.params.merge!(DEFAULT_PARAMS)
+    #   c.headers.merge!(DEFAULT_HEADERS)
+    # end
+
+    # @!visibility private
+    TPLINK_API = Faraday.new('https://wap.tplinkcloud.com') do |c|
       c.request :json
       c.response :json, content_type: /\bjson$/i
       c.adapter Faraday.default_adapter
@@ -27,14 +42,7 @@ module TPLink
       c.headers.merge!(DEFAULT_HEADERS)
     end
 
-    DEVICE_API = Faraday.new('https://wap.tplinkcloud.com') do |c|
-      c.request :json
-      c.response :json, content_type: /\bjson$/i
-      c.adapter Faraday.default_adapter
-      c.params.merge!(DEFAULT_PARAMS)
-      c.headers.merge!(DEFAULT_HEADERS)
-    end
-
+    # @!visibility private
     DEFAULT_OPTIONS = {
       config: "#{ENV['HOME']}/.tp_link"
     }.freeze
@@ -45,7 +53,7 @@ module TPLink
 
     def token(regen = false)
       return @token if @token && regen == false
-      response = TOKEN_API.post do |req|
+      response = TPLINK_API.post do |req|
         req.body = { method: 'login', url: 'https://wap.tplinkcloud.com',
                      params: @config.to_hash }.to_json
       end
@@ -53,7 +61,8 @@ module TPLink
     end
 
     def device_list
-      response = DEVICE_API.post do |req|
+      @device_list if @device_list
+      response = TPLINK_API.post do |req|
         req.params['token'] = token
         req.body = { method: 'getDeviceList' }.to_json
       end
@@ -76,7 +85,6 @@ module TPLink
         c.request :json
         c.response :json, content_type: /\bjson$/i
         c.adapter Faraday.default_adapter
-        # c.params.merge!(DEFAULT_PARAMS)
         c.params['token'] = token
         c.headers.merge!(DEFAULT_HEADERS)
       end
