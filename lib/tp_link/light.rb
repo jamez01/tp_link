@@ -1,48 +1,31 @@
 # frozen_string_literal: true
 
 module TPLink
-  # Dimmable TPLink lights
-  class Light
-    attr_reader :alias, :name, :status, :type, :url, :model, :mac, :role
-    attr_reader :same_region, :hw_id, :fw_id, :id, :hw_version, :fw_version
-    def initialize(parent, dev)
-      @parent = parent
-      @alias = dev['alias']
-      @name = dev['deviceName']
-      @status = dev['status']
-      @type = dev['deviceType']
-      @url = dev['appServerUrl']
-      @model = dev['deviceModel']
-      @mac = dev['deviceMac']
-      @role = dev['role']
-      @same_region = dev['isSameRegion']
-      @hw_id = dev['hwId']
-      @fw_id = dev['fwId']
-      @id = dev['deviceId']
-      @hw_version = dev['deviceHwVer']
-      @fw_version = dev['fwVer']
-    end
+  # Control TPLink Dimmable lights
+  # @example
+  #  light.on # turn on light
+  #  light.off # turn off light
+  #
+  #  # turn on light and set brightness to 50%
+  #  light.on
+  #  light.on(50)
+  class Light < TPLink::Device
 
+    # Turn light on
+    # @param b [Integer<1-100>] Set light intensity between 1 and 100
     def on(b = 100)
       transition_light_state(1, b)
     end
 
+    # Turn light off
     def off
       transition_light_state(0, 100)
-    end
-
-    def on?
-      @status == 1
-    end
-
-    def off?
-      !on?
     end
 
     private
 
     def transition_light_state(o, b)
-      @parent.api.send_data(self,
+      @parent.send_data(self,
                             "smartlife.iot.smartbulb.lightingservice": {
                               "transition_light_state": {
                                 "on_off": o,

@@ -9,4 +9,5 @@ group :development do
   gem 'rspec'
   gem 'rubocop'
   gem 'webmock'
+  gem 'yard'
 end
