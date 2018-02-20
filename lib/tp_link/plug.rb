@@ -24,7 +24,7 @@ module TPLink
 
     private
     def set_relay_state(s)
-      @parent.send_data({"system":{"set_relay_state":{"state": s }}})
+      @parent.send_data(self,{"system":{"set_relay_state":{"state": s }}})
     end
   end
 end
