@@ -69,10 +69,12 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">Object</span>
+      <span class="inheritName"><span class='object_link'><a href="Device.html" title="TPLink::Device (class)">Device</a></span></span>
       
         <ul class="fullTree">
           <li>Object</li>
+          
+            <li class="next"><span class='object_link'><a href="Device.html" title="TPLink::Device (class)">Device</a></span></li>
           
             <li class="next">TPLink::Plug</li>
           
@@ -116,6 +118,11 @@
 
 
 
+  <h2>Instance Attribute Summary</h2>
+  
+  <h3 class="inherited">Attributes inherited from <span class='object_link'><a href="Device.html" title="TPLink::Device (class)">Device</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Device.html#alias-instance_method" title="TPLink::Device#alias (method)">#alias</a></span>, <span class='object_link'><a href="Device.html#name-instance_method" title="TPLink::Device#name (method)">#name</a></span>, <span class='object_link'><a href="Device.html#status-instance_method" title="TPLink::Device#status (method)">#status</a></span></p>
+
 
   
     <h2>
@@ -142,7 +149,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Turn device off.</p>
+</div></span>
   
 </li>
 
@@ -164,7 +173,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Turn device on.</p>
+</div></span>
   
 </li>
 
@@ -186,7 +197,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Toggle device (turn off if on, on if off).</p>
+</div></span>
   
 </li>
 
@@ -194,6 +207,17 @@
     </ul>
   
 
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <h3 class="inherited">Methods inherited from <span class='object_link'><a href="Device.html" title="TPLink::Device (class)">Device</a></span></h3>
+  <p class="inherited"><span class='object_link'><a href="Device.html#off%3F-instance_method" title="TPLink::Device#off? (method)">#off?</a></span>, <span class='object_link'><a href="Device.html#on%3F-instance_method" title="TPLink::Device#on? (method)">#on?</a></span>, <span class='object_link'><a href="Device.html#reload-instance_method" title="TPLink::Device#reload (method)">#reload</a></span>, <span class='object_link'><a href="Device.html#rssi-instance_method" title="TPLink::Device#rssi (method)">#rssi</a></span></p>
 
 
   <div id="instance_method_details" class="method_details_list">
@@ -209,18 +233,29 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Turn device off</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-11
 12
-13</pre>
+13
+14</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/plug.rb', line 11</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/plug.rb', line 12</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_off'>off</span>
   <span class='id identifier rubyid_set_relay_state'>set_relay_state</span><span class='lparen'>(</span><span class='int'>0</span><span class='rparen'>)</span>
@@ -239,7 +274,18 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Turn device on</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
@@ -269,22 +315,33 @@
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Toggle device (turn off if on, on if off)</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-15
-16
 17
 18
 19
 20
-21</pre>
+21
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/plug.rb', line 15</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/plug.rb', line 17</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_toggle'>toggle</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_on?'>on?</span>
@@ -303,7 +360,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Feb 19 16:24:03 2018 by
+  Generated on Wed Feb 21 10:01:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.4.2).
 </div>

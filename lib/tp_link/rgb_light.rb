@@ -17,14 +17,14 @@ module TPLink
 
     def transition_light_state(o, b, h, s)
       @parent.send_data(self,
-                            "smartlife.iot.smartbulb.lightingservice": {
-                              "transition_light_state": {
-                                "on_off": o,
-                                "brightness": b,
-                                "hue": h,
-                                "saturation": s
-                              }
-                            })
+                        "smartlife.iot.smartbulb.lightingservice": {
+                          "transition_light_state": {
+                            "on_off": o,
+                            "brightness": b,
+                            "hue": h,
+                            "saturation": s
+                          }
+                        })
     end
   end
 end

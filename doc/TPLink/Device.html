@@ -112,7 +112,7 @@
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="Light.html" title="TPLink::Light (class)">Light</a></span>, <span class='object_link'><a href="RGBLight.html" title="TPLink::RGBLight (class)">RGBLight</a></span></p>
+  <p class="children"><span class='object_link'><a href="Light.html" title="TPLink::Light (class)">Light</a></span>, <span class='object_link'><a href="Plug.html" title="TPLink::Plug (class)">Plug</a></span>, <span class='object_link'><a href="RGBLight.html" title="TPLink::RGBLight (class)">RGBLight</a></span></p>
 </div>
 
 
@@ -309,6 +309,54 @@
 
   
     <span class="summary_desc"><div class='inline'></div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#reload-instance_method" title="#reload (instance method)">#<strong>reload</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Reload data / device state.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#rssi-instance_method" title="#rssi (instance method)">#<strong>rssi</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Get Wifi signal strength in dB.</p>
+</div></span>
   
 </li>
 
@@ -550,12 +598,12 @@
       <pre class="lines">
 
 
-48</pre>
+73</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 73</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_off'>off</span><span class='semicolon'>;</span><span class='kw'>end</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_off'>off</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -617,12 +665,12 @@
       <pre class="lines">
 
 
-58
-59
-60</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_off?'>off?</span>
   <span class='op'>!</span><span class='id identifier rubyid_on?'>on?</span>
@@ -658,12 +706,12 @@
       <pre class="lines">
 
 
-45</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 70</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_on'>on</span><span class='semicolon'>;</span><span class='kw'>end</span></pre>
+<span class='kw'>def</span> <span class='id identifier rubyid_on'>on</span><span class='semicolon'>;</span> <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
@@ -725,15 +773,123 @@
       <pre class="lines">
 
 
-52
-53
-54</pre>
+77
+78
+79
+80</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 52</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on?'>on?</span>
+  <span class='id identifier rubyid_reload'>reload</span>
   <span class='ivar'>@status</span> <span class='op'>==</span> <span class='int'>1</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="reload-instance_method">
+  
+    #<strong>reload</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Reload data / device state</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 51</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_reload'>reload</span>
+  <span class='id identifier rubyid_res'>res</span> <span class='op'>=</span> <span class='ivar'>@parent</span><span class='period'>.</span><span class='id identifier rubyid_send_data'>send_data</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span>
+                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>system</span><span class='label_end'>&quot;:</span>
+                     <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_sysinfo</span><span class='label_end'>&quot;:</span> <span class='kw'>nil</span> <span class='rbrace'>}</span><span class='comma'>,</span>
+                    <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>emeter</span><span class='label_end'>&quot;:</span> <span class='lbrace'>{</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_realtime</span><span class='label_end'>&quot;:</span> <span class='kw'>nil</span> <span class='rbrace'>}</span><span class='rparen'>)</span>
+  <span class='ivar'>@rssi</span> <span class='op'>=</span> <span class='id identifier rubyid_res'>res</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>responseData</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>system</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>get_sysinfo</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>rssi</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>case</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>TPLink::Light</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_reload_light'>reload_light</span><span class='lparen'>(</span><span class='id identifier rubyid_res'>res</span><span class='rparen'>)</span>
+  <span class='kw'>when</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>TPLink::Plug</span><span class='tstring_end'>&#39;</span></span>
+    <span class='id identifier rubyid_reload_plug'>reload_plug</span><span class='lparen'>(</span><span class='id identifier rubyid_res'>res</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
+  <span class='kw'>true</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="rssi-instance_method">
+  
+    #<strong>rssi</strong>  &#x21d2; <tt>Object</tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Get Wifi signal strength in dB</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+46
+47
+48
+49</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/device.rb', line 46</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_rssi'>rssi</span>
+  <span class='id identifier rubyid_reload'>reload</span>
+  <span class='ivar'>@rssi</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -745,7 +901,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Feb 19 16:24:03 2018 by
+  Generated on Wed Feb 21 10:01:17 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.4.2).
 </div>
