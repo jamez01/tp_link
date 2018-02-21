@@ -41,6 +41,31 @@ module TPLink
       @fw_version = dev['fwVer']
     end
 
+    # Get Wifi signal strength in dB
+    # @returns [Integer]
+    def rssi
+      reload
+      @rssi
+    end
+    # Reload data / device state
+    def reload
+      res = @parent.send_data(self,
+                        "system":
+                         { "get_sysinfo": nil },
+                        "emeter": { "get_realtime": nil })
+      @rssi = res["responseData"]["system"]["get_sysinfo"]["rssi"]
+      case self.class.to_s
+      when 'TPLink::Light'
+        reload_light(res)
+      when 'TPLink::Plug'
+        reload_plug(res)
+      end
+      true
+    end
+
+    # {"error_code":0,"result":{"responseData":"{\"system\":{\"get_sysinfo\":{\"sw_ver\":\"1.5.1 Build 171109 Rel.165500\",\"hw_ver\":\"1.0\",\"type\":\"IOT.SMARTPLUGSWITCH\",\"model\":\"HS105(US)\",\"mac\":\"B0:4E:26:19:7B:89\",\"dev_name\":\"Smart Wi-Fi Plug Mini\",\"alias\":\"Smart Plug\",\"relay_state\":0,\"on_time\":0,\"active_mode\":\"schedule\",\"feature\":\"TIM\",\"updating\":0,\"icon_hash\":\"\",\"rssi\":-59,\"led_off\":0,\"longitude_i\":-848233,\"latitude_i\":435245,\"hwId\":\"E5D7E6089B060EF662783C23AE110522\",\"fwId\":\"00000000000000000000000000000000\",\"deviceId\":\"80067D31EE9AD601BC6EECEF303E2B4D19662478\",\"oemId\":\"003E098AF0D44D4BAB796B3F6A7A830E\",\"err_code\":0}},\"emeter\":{\"get_realtime\":{\"err_code\":-1,\"err_msg\":\"module not support\"}}}"}}
+
+
     # Turn device on
     def on; end
 
@@ -50,6 +75,7 @@ module TPLink
     # @return [True] if device is on.
     # @return [False] if device is off.
     def on?
+      reload
       @status == 1
     end
 
@@ -57,6 +83,20 @@ module TPLink
     # @return [False] if device is on.
     def off?
       !on?
+    end
+
+    private
+    def reload_plug(res)
+      @status = res['responseData']['system']['get_sysinfo']['relay_state']
+    end
+
+    def reload_light(res)
+      @status = res['responseData']['system']['get_sysinfo']['light_state']['on_off']
+    end
+
+    def reload_rgb(res)
+      # TODO: Add variables for Hue, and Saturation
+      @status = res['responseData']['system']['get_sysinfo']['light_state']['on_off']
     end
   end
 end

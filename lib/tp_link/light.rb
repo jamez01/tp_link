@@ -10,7 +10,6 @@ module TPLink
   #  light.on
   #  light.on(50)
   class Light < TPLink::Device
-
     # Turn light on
     # @param b [Integer<1-100>] Set light intensity between 1 and 100
     def on(b = 100)
@@ -26,12 +25,12 @@ module TPLink
 
     def transition_light_state(o, b)
       @parent.send_data(self,
-                            "smartlife.iot.smartbulb.lightingservice": {
-                              "transition_light_state": {
-                                "on_off": o,
-                                "brightness": b
-                              }
-                            })
+                        "smartlife.iot.smartbulb.lightingservice": {
+                          "transition_light_state": {
+                            "on_off": o,
+                            "brightness": b
+                          }
+                        })
     end
   end
 end

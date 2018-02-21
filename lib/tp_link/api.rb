@@ -71,11 +71,12 @@ module TPLink
 
     def send_data(device, data)
       conn = data_connection(device)
-      conn.post do |req|
+      res = conn.post do |req|
         req.body = { method: 'passthrough',
                      params: { deviceId: device.id,
                                requestData: data.to_json } }.to_json
       end
+      parse_response(res)
     end
 
     private
@@ -91,10 +92,18 @@ module TPLink
     end
 
     def parse_response(res)
-      raise TPLinkCloudError, 'Generic TPLinkCloud Error' unless res.success?
+      raise TPLink::TPLinkCloudError, 'Generic TPLinkCloud Error' unless res.success?
       response = JSON.parse(res.body)
-      raise TPLinkCloudError, 'TPLinkCloud API Error' \
-        unless res.body['error'].to_i.zero?
+      raise TPLink::DeviceOffline if response['error_code'].to_i == -20571
+      raise TPLink::TPLinkCloudError, 'TPLinkCloud API Error' \
+        unless response['error_code'].to_i.zero?
+      raise TPLink::TPLinkCloudError, 'No respone data' \
+        unless res.body['result']
+      if response['result'].key?('responseData') && \
+         response['result']['responseData'].class == String
+        response['result']['responseData'] = \
+          JSON.parse(response['result']['responseData'])
+      end
       response['result']
     end
   end
