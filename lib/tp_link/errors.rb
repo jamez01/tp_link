@@ -6,7 +6,7 @@ module TPLink
   # Handle Errrors related to TPLink's Cloud
   class DeviceOffline < StandardError
     def initialize
-      super("Device Offline")
+      super('Device Offline')
     end
   end
   class TPLinkCloudError < StandardError

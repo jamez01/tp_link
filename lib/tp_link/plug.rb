@@ -5,12 +5,12 @@ module TPLink
   class Plug < TPLink::Device
     # Turn device on
     def on
-      set_relay_state(1)
+      relay_state(1)
     end
 
     # Turn device off
     def off
-      set_relay_state(0)
+      relay_state(0)
     end
 
     # Toggle device (turn off if on, on if off)
@@ -24,7 +24,7 @@ module TPLink
 
     private
 
-    def set_relay_state(s)
+    def relay_state(s)
       @parent.send_data(self, "system": { "set_relay_state": { "state": s } })
     end
   end
