@@ -21,6 +21,15 @@ module TPLink
       transition_light_state(0, 100)
     end
 
+    # Toggle device (turn off if on, on if off)
+    def toggle
+      if on?
+        off
+      else
+        on
+      end
+    end
+
     private
 
     def transition_light_state(o, b)

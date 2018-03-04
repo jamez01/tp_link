@@ -36,15 +36,16 @@ module TPLink
       reload
     end
 
-    # Find a device by it's alias.
+    # Find a device by it's alias.  Search is case insensitive.
     # @param [String] a device alias.
     # @return [TPLink::Light] If device is a dimmable light.
     # @return [TPLink::RGBLight] if device is an RGB light.
     # @return [TPLink::Plug] if device is a smart plug.
+    # @return [nil] if no device is found.
     # @example Find your kitchen light
     #   smarthome.find("kitchen")
     def find(a)
-      devices.find { |d| d.alias.match(/^#{a}$/i) }
+      devices.find { |d| d.alias.match?(/^#{a}$/i) }
     end
 
     # Find a device by it's alias.

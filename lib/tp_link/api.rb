@@ -49,6 +49,8 @@ module TPLink
     def initialize(opts = {})
       options = DEFAULT_OPTIONS.merge(opts)
       @config = Config.new(options[:config])
+      @token = nil
+      @device_list = []
     end
 
     def token(regen = false)
@@ -94,7 +96,7 @@ module TPLink
     def parse_response(res)
       raise TPLink::TPLinkCloudError, 'Generic TPLinkCloud Error' unless res.success?
       response = JSON.parse(res.body)
-      raise TPLink::DeviceOffline if response['error_code'].to_i == -20571
+      raise TPLink::DeviceOffline if response['error_code'].to_i == -20_571
       raise TPLink::TPLinkCloudError, 'TPLinkCloud API Error' \
         unless response['error_code'].to_i.zero?
       raise TPLink::TPLinkCloudError, 'No respone data' \

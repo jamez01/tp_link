@@ -1,9 +1,9 @@
 lib/tp_link.rb 23969b5f6b0a241e10e69df0abf9ccda0e2cbc77
-lib/tp_link/api.rb 44b7f795edca130238494d4e485204890b74ce1f
+lib/tp_link/api.rb 0518b7619f5ad5489d59af58d206438d63161939
 lib/tp_link/plug.rb a212ed223bdd9291fcb2a64d935f6aff5200cca3
-lib/tp_link/light.rb eecc35282734704dd2a3ce52f4de04dd295b5ccd
-lib/tp_link/config.rb f259c7bc8a2276799422e3c7468daa149f45b1dd
-lib/tp_link/device.rb ddeedf68bed80235b7cf1a2e3e14c0892b12ee68
-lib/tp_link/errors.rb d89801c4c66f5486b38da6c43c03e09e4cc9e7ca
+lib/tp_link/light.rb 86a5c81615fd9cdbfe2b334164dd9ffa32a53ce7
+lib/tp_link/config.rb 26e5399cac6d570fb4c431dad2f602ff9d527c7a
+lib/tp_link/device.rb 18b0087d6b439cdf27045c372485635552b80393
+lib/tp_link/errors.rb bc176facaaa6e2c28e700e299d3722c02bc7abde
 lib/tp_link/rgb_light.rb 518d1a65de31130e58109370787cef612aaa915d
-lib/tp_link/smart_home.rb d4fa4285281b3f89db228058d747b5c405e26dc7
+lib/tp_link/smart_home.rb 9d3b7da4afcbc27206f17135d53fb16f43a3faac
