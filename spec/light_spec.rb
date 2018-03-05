@@ -7,7 +7,7 @@ require_relative '../lib/tp_link.rb'
 
 RSpec.describe TPLink::Light do
   let(:smarthome) do
-    TPLink::SmartHome.new
+    TPLink::SmartHome.new('user' => 'test@example.com', 'password' => 'password123')
   end
   let(:devices) do
     [{ 'alias' => 'test device',
