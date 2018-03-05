@@ -1,7 +1,7 @@
 # This file is a template, and might need editing before it works on your project.
 # Official language image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/ruby/tags/
-image: "ruby:2.3"
+image: "ruby:2.4"
 
 # Cache gems in between builds
 cache:
@@ -18,9 +18,9 @@ before_script:
   - bundle install -j $(nproc) --path vendor  # Install dependencies into ./vendor/ruby
 
 # Optional - Delete if not using `rubocop`
-rubocop:
-  script:
-  - rubocop
+#rubocop:
+#  script:
+#  - rubocop
 
 rspec:
   script:
