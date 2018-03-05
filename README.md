@@ -1,5 +1,6 @@
-# TP_Link
+[![pipeline status](https://ruby-code.com/james/tp_link/badges/master/pipeline.svg)](https://ruby-code.com/james/tp_link/commits/master)
 
+# TP_Link
 tp_link allows you to interact with TP-Link smart lights.
 
 ## Installation
