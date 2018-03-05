@@ -45,7 +45,7 @@ module TPLink
     # @example Find your kitchen light
     #   smarthome.find("kitchen")
     def find(a)
-      devices.find { |d| d.alias.match?(/^#{a}$/i) }
+      devices.find { |d| d.alias.match(/^#{a}$/i) }
     end
 
     # Find a device by it's alias.
@@ -73,9 +73,9 @@ module TPLink
       case device['deviceType']
       when 'IOT.SMARTBULB'
         return TPLink::Light.new(self, device) \
-          if device['deviceModel'].match?(/^(LB100|LB110|BR30)/)
+          if device['deviceModel'].match(/^(LB100|LB110|BR30)/)
         return TPLink::RGBLight.new(self, device) \
-          if device['deviceModel'].match?(/^(LB130|LB120)/)
+          if device['deviceModel'].match(/^(LB130|LB120)/)
       when 'IOT.SMARTPLUGSWITCH'
         return TPLink::Plug.new(self, device)
       end
