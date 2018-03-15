@@ -6,11 +6,12 @@ require 'webmock/rspec'
 require_relative '../lib/tp_link.rb'
 
 RSpec.describe TPLink::API do
+  let(:uuid) { "21a91585-6dcb-4f04-82c7-ac18eb5bd18c" }
   let(:stub_login) {
     stub_request(:post, "https://wap.tplinkcloud.com/").
     with(
     query: hash_including("appName" => "Kasa_Android"),
-    body: "{\"method\":\"login\",\"url\":\"https://wap.tplinkcloud.com\",\"params\":{\"appType\":\"Kasa_Android\",\"cloudUserName\":\"test@example.com\",\"cloudPassword\":\"password123\",\"terminalUUID\":null}}",
+    body: "{\"method\":\"login\",\"url\":\"https://wap.tplinkcloud.com\",\"params\":{\"appType\":\"Kasa_Android\",\"cloudUserName\":\"test@example.com\",\"cloudPassword\":\"password123\",\"terminalUUID\":\"#{uuid}\"}}",
     headers: {
       'Accept'=>'application/json, text/plain, */*',
       'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
@@ -26,7 +27,8 @@ RSpec.describe TPLink::API do
     let(:config) {
       {
         'user' => 'test@example.com',
-        'password' => 'password123'
+        'password' => 'password123',
+        'uuid' => uuid
       }
     }
     subject do

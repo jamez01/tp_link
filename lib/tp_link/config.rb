@@ -5,9 +5,8 @@ module TPLink
   # It is used internally and should not need to be called.
   # @!visibility private
   class Config
-    def initialize(config = "#{ENV['HOME']}/.tp_link")
-      @config_file = nil
-      @config = get_config(config)
+    def initialize(config = {})
+      @config = config
       raise 'User name not spcified in configuration.' \
         unless @config.key?('user')
       raise 'Password not specified in configuration.' \
@@ -16,12 +15,7 @@ module TPLink
     end
 
     def generate_uuid
-      if @config_file && @config['uuid'].nil?
-        @config['uuid'] ||= SecureRandom.uuid
-        File.open(@config_file, 'w') do |f|
-          f.write @config.to_yaml
-        end
-      end
+      @config['uuid'] ||= SecureRandom.uuid
       @config['uuid']
     end
 
@@ -30,7 +24,7 @@ module TPLink
     end
 
     def terminal_uuid
-      @config['uuid']
+      @config['uuid'] ||= Securerandom.uuid
     end
 
     def cloud_user_name
@@ -52,20 +46,6 @@ module TPLink
 
     def to_json(_o)
       to_hash.to_json
-    end
-
-    private
-
-    def get_config(config)
-      if config.is_a? String
-        raise "Config file missing: #{config}" \
-          unless File.exist?(config)
-        @config_file = config
-        return YAML.load_file(config) || {}
-      elsif !config.is_a?(Hash)
-        raise "Invalid config type #{config.class}"
-      end
-      config
     end
   end
 end

@@ -43,9 +43,8 @@ module TPLink
     end
 
     # @!visibility private
-    def initialize(opts = nil)
-      options = opts || "#{ENV['HOME']}/.tp_link"
-      @config = Config.new(options)
+    def initialize(opts = {})
+      @config = Config.new(opts)
       @token = nil
       @device_list = []
     end
