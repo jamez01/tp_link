@@ -461,12 +461,12 @@ kitchen_light.off</code></pre>
       <pre class="lines">
 
 
-54
 55
-56</pre>
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_devices'>devices</span>
   <span class='ivar'>@devices</span> <span class='op'>||=</span> <span class='ivar'>@raw_devices</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='id identifier rubyid_dev_to_class'>dev_to_class</span><span class='lparen'>(</span><span class='id identifier rubyid_d'>d</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_compact'>compact</span>
@@ -488,7 +488,7 @@ kitchen_light.off</code></pre>
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Find a device by it&#39;s alias.</p>
+<p>Find a device by it&#39;s alias.  Search is case insensitive.</p>
 
 
   </div>
@@ -572,6 +572,20 @@ kitchen_light.off</code></pre>
       
     </li>
   
+    <li>
+      
+      
+        <span class='type'>(<tt>nil</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>if no device is found.</p>
+</div>
+      
+    </li>
+  
 </ul>
 
 </div><table class="source_code">
@@ -580,12 +594,12 @@ kitchen_light.off</code></pre>
       <pre class="lines">
 
 
-46
 47
-48</pre>
+48
+49</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 47</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_find'>find</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_devices'>devices</span><span class='period'>.</span><span class='id identifier rubyid_find'>find</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_d'>d</span><span class='op'>|</span> <span class='id identifier rubyid_d'>d</span><span class='period'>.</span><span class='id identifier rubyid_alias'>alias</span><span class='period'>.</span><span class='id identifier rubyid_match'>match</span><span class='lparen'>(</span><span class='tstring'><span class='regexp_beg'>/</span><span class='tstring_content'>^</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_a'>a</span><span class='embexpr_end'>}</span><span class='tstring_content'>$</span><span class='regexp_end'>/i</span></span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -621,13 +635,13 @@ kitchen_light.off</code></pre>
       <pre class="lines">
 
 
-63
 64
 65
-66</pre>
+66
+67</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 63</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 64</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reload'>reload</span>
   <span class='ivar'>@raw_devices</span> <span class='op'>=</span> <span class='ivar'>@api</span><span class='period'>.</span><span class='id identifier rubyid_device_list'>device_list</span>
@@ -653,12 +667,12 @@ kitchen_light.off</code></pre>
       <pre class="lines">
 
 
-58
 59
-60</pre>
+60
+61</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 58</span>
+      <pre class="code"><span class="info file"># File 'lib/tp_link/smart_home.rb', line 59</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_send_data'>send_data</span><span class='lparen'>(</span><span class='id identifier rubyid_device'>device</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
   <span class='ivar'>@api</span><span class='period'>.</span><span class='id identifier rubyid_send_data'>send_data</span><span class='lparen'>(</span><span class='id identifier rubyid_device'>device</span><span class='comma'>,</span> <span class='id identifier rubyid_data'>data</span><span class='rparen'>)</span>
@@ -673,7 +687,7 @@ kitchen_light.off</code></pre>
 </div>
 
       <div id="footer">
-  Generated on Wed Feb 21 10:01:17 2018 by
+  Generated on Mon Mar 19 11:56:49 2018 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.12 (ruby-2.4.2).
 </div>
