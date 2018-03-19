@@ -15,27 +15,18 @@ And then execute:
 
     $ bundle
 
-Or install it yourself as:
+Or inst
+all it yourself as:
 
     $ gem tp_link
 
 ## Usage
 
-#### [OPTIONAL] Create your config file at `~/.tp_link` The contents should include your username and password for Kasa/TPLink Cloud.
-
-```
----
-user: your-kasa-email@example.com
-password: YourPassword
-```
-
-#### Examples:
-
 ```ruby
-# You can also pass the configuration in pragmatically:
-# sh=TPLink::SmartHome.new('user' => 'test@example.com',
-#                          'password' => 'password123')
-sh = TPLink::SmartHome.new
+require 'tp_link'
+#
+sh=TPLink::SmartHome.new('user' => 'test@example.com',
+                         'password' => 'password123')
 
 # Get array of TPLink Devices (currently only dimmable lights work).
 sh.devices
@@ -53,10 +44,14 @@ light.off
 light.on(50)
 ```
 
+# Documentation
+
+## http://www.rubydoc.info/gems/tp_link
+
 ## Contributing
 
 Bug reports and pull requests are welcome on ruby-code.com at
-https://ruby-code.com/james/tp_link/
+https://ruby-code.com/james/tp_link
 
 ## License
 
