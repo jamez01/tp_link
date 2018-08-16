@@ -28,7 +28,7 @@ require 'tp_link'
 sh=TPLink::SmartHome.new('user' => 'test@example.com',
                          'password' => 'password123')
 
-# Get array of TPLink Devices (currently only dimmable lights work).
+# Get array of TPLink Devices
 sh.devices
 
 # Find a device by name:
