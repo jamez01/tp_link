@@ -13,6 +13,7 @@ module TPLink
     # Turn light on
     # @param b [Integer<1-100>] Set light intensity between 1 and 100
     def on(b = 100)
+      transition_light_state(1, b) if self.off?
       transition_light_state(1, b)
     end
 

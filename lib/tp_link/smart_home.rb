@@ -53,16 +53,21 @@ module TPLink
     # @example Turn everything off
     #   smarthome.devices.each { |device| device.off }
     def devices
-      @devices ||= @raw_devices.map { |d| dev_to_class(d) }.compact
+      @devices ||= raw_devices.map { |d| dev_to_class(d) }.compact
     end
 
     def send_data(device, data)
       @api.send_data(device, data)
     end
 
+    def raw_devices
+      return @raw_devices if @raw_devices
+      @raw_devices = @api.device_list
+    end
+
     # Reload devices from TPLink api.
     def reload
-      @raw_devices = @api.device_list
+      @raw_devices = nil
       @devices = nil
     end
 
