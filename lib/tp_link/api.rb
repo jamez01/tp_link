@@ -91,7 +91,7 @@ module TPLink
 
     def parse_response(res)
       raise TPLink::TPLinkCloudError, 'Generic TPLinkCloud Error' unless res.success?
-      response = JSON.parse(res.body)
+      response = res.body
       raise TPLink::DeviceOffline if response['error_code'].to_i == -20_571
       raise TPLink::TPLinkCloudError, 'TPLinkCloud API Error' \
         unless response['error_code'].to_i.zero?
