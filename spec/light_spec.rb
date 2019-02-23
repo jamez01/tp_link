@@ -22,6 +22,7 @@ RSpec.describe TPLink::Light do
 
   it '#on' do
     allow_any_instance_of(TPLink::API).to receive(:device_list).and_return(devices)
+    allow_any_instance_of(TPLink::Light).to receive(:reload).and_return(true)
     allow_any_instance_of(TPLink::SmartHome).to receive(:send_data).and_return(true)
     expect(subject.on).to eql(true)
   end
@@ -39,6 +40,8 @@ RSpec.describe TPLink::Light do
 
   it '#transition_light_state' do
     allow_any_instance_of(TPLink::API).to receive(:device_list).and_return(devices)
+    allow_any_instance_of(TPLink::Device).to receive(:reload).and_return(true)
+    expect(smarthome).to receive(:send_data).and_return(true)
     expect(smarthome).to receive(:send_data).and_return(true)
     expect(subject.on).to eql(true)
   end
