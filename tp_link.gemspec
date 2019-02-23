@@ -2,10 +2,10 @@
 
 Gem::Specification.new do |s|
   s.name        = 'tp_link'
-  s.version     = '0.0.4'
+  s.version     = '1.0.0'
   s.summary     = 'TPLink smarthome library'
   s.description = 'Control various TPLink smart home devices.'
-  s.authors     = ['James Paterni', 'Ian MOrgan']
+  s.authors     = ['James Paterni', 'Ian Morgan']
   s.email       = 'tp_link@ruby-code.com'
   s.files = Dir.glob('./lib/**/*.rb')
   # s.executables = ['tplink']
